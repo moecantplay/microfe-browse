@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import Loading from './components/Loading';
 import Filters from './Filters/Filters';
 import RestaurantList from './RestaurantList/RestaurantList';
-import styles from "./App.module.scss";
+import styles from './App.module.scss';
 
 const defaultHistory = createBrowserHistory();
 
@@ -52,9 +52,10 @@ const App = ({ history }) => {
           })),
         );
       })
-      .catch(() => {
+      .catch(err => {
         setLoading(false);
         setError(true);
+        console.log(err);
       });
   }, []);
 
@@ -72,20 +73,24 @@ const App = ({ history }) => {
 
   return (
     <Router history={history || defaultHistory}>
-      <div className={styles.MainColumn}>
-        <Filters
-          name={nameFilter}
-          priceRange={priceRangeFilter}
-          setNameFilter={changeNameFilter}
-          setPriceRangeFilter={changePriceRangeFilter}
-          resetAll={resetAllFilters}
-        />
-        <RestaurantList
-          restaurants={restaurants}
-          priceRangeFilter={priceRangeFilter}
-          nameFilter={nameFilter}
-        />
-      </div>
+      {!loading ? (
+        <div className={styles.MainColumn}>
+          <Filters
+            name={nameFilter}
+            priceRange={priceRangeFilter}
+            setNameFilter={changeNameFilter}
+            setPriceRangeFilter={changePriceRangeFilter}
+            resetAll={resetAllFilters}
+          />
+          <RestaurantList
+            restaurants={restaurants}
+            priceRangeFilter={priceRangeFilter}
+            nameFilter={nameFilter}
+          />
+        </div>
+      ) : (
+        'Loading...'
+      )}
     </Router>
   );
 };
