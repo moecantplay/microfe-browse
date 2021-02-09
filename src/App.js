@@ -42,7 +42,7 @@ const App = ({ history }) => {
   useEffect(() => {
     const host = process.env.REACT_APP_CONTENT_HOST;
     fetch(`${host}/restaurants.json`)
-      .then(result => result.json())
+      .then(res => res.json())
       .then(restaurants => {
         setLoading(false);
         setRestaurants(
