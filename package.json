@@ -9,7 +9,7 @@
     "format": "prettier --write",
     "start": "PORT=3001 react-app-rewired start",
     "build": "react-app-rewired build",
-    "build-prod": "cp .env.production .env && react-app-rewired build && cp headers.txt build/_headers.txt",
+    "build-prod": "cp .env.production .env && react-app-rewired build && cp _headers build/_headers",
     "test": "react-app-rewired test"
   },
   "dependencies": {
