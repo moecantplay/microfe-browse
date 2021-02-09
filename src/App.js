@@ -59,39 +59,36 @@ const App = ({ history }) => {
       });
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return (
-      <div className={styles.MainColumn}>
-        Sorry, but the restaurant list is unavailable right now
-      </div>
-    );
-  }
+  const errorBlock = () => (
+    <div className={styles.MainColumn}>
+      Sorry, but the restaurant list is unavailable right now
+    </div>
+  );
 
   return (
-    <Router history={history || defaultHistory}>
-      {!loading ? (
-        <div className={styles.MainColumn}>
-          <Filters
-            name={nameFilter}
-            priceRange={priceRangeFilter}
-            setNameFilter={changeNameFilter}
-            setPriceRangeFilter={changePriceRangeFilter}
-            resetAll={resetAllFilters}
-          />
-          <RestaurantList
-            restaurants={restaurants}
-            priceRangeFilter={priceRangeFilter}
-            nameFilter={nameFilter}
-          />
-        </div>
+    <>
+      {loading ? (
+        <Loading />
       ) : (
-        'Loading...'
+        <Router history={history || defaultHistory}>
+          <div className={styles.MainColumn}>
+            <Filters
+              name={nameFilter}
+              priceRange={priceRangeFilter}
+              setNameFilter={changeNameFilter}
+              setPriceRangeFilter={changePriceRangeFilter}
+              resetAll={resetAllFilters}
+            />
+            <RestaurantList
+              restaurants={restaurants}
+              priceRangeFilter={priceRangeFilter}
+              nameFilter={nameFilter}
+            />
+          </div>
+        </Router>
       )}
-    </Router>
+      {error && errorBlock()}
+    </>
   );
 };
 
