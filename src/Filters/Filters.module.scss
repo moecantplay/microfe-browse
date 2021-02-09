@@ -1,0 +1,25 @@
+$mediumScreen: (max-width: 830px);
+$smallScreen: (max-width: 430px);
+
+.FilterRow {
+  padding: 30px;
+  font-size: 24px;
+  display: flex;
+
+  @media($mediumScreen) {
+    flex-direction: column;
+  }
+}
+
+.PriceRangeFields {
+  margin: 0 20px;
+  display: flex;
+
+  @media(mediumScreen) {
+    margin: 10px;
+  }
+
+  @media(smallScreen) {
+    flex-direction: column;
+  }
+}
